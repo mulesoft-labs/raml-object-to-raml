@@ -257,5 +257,57 @@ describe('raml object to raml', function () {
         '          type: string'
       ].join('\n'));
     });
+
+    it('resources', function () {
+      var str = toRaml({
+        resources: [{
+          type: 'collection',
+          relativeUri: '/users',
+          methods: [{
+            headers: {
+              Accept: {
+                description: 'Used to set the specified media type.',
+                displayName: 'Accept'
+              }
+            },
+            method: 'get',
+            responses: {
+              '200': {
+                body: {
+                  'application/json': {
+                    schema: 'search-users'
+                  }
+                }
+              }
+            },
+            queryParameters: {
+              sort: {
+                description: 'If not provided, results are sorted by best match.',
+                enum: ['followers', 'repositories', 'joined']
+              }
+            }
+          }]
+        }]
+      });
+
+      expect(str).to.equal([
+        RAML_PREFIX,
+        '/users:',
+        '  type: collection',
+        '  get:',
+        '    headers:',
+        '      Accept:',
+        '        description: Used to set the specified media type.',
+        '    queryParameters:',
+        '      sort:',
+        '        description: If not provided, results are sorted by best match.',
+        '        enum: [ followers, repositories, joined ]',
+        '    responses:',
+        '      200:',
+        '        body:',
+        '          application/json:',
+        '            schema: search-users'
+      ].join('\n'));
+    });
   });
 });
