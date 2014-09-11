@@ -168,5 +168,24 @@ describe('raml object to raml', function () {
         '      }'
       ].join('\n'));
     });
+
+    it('documentation', function () {
+      var str = toRaml({
+        documentation: [
+          {
+            title: 'Home',
+            content: 'Welcome to the _Zencoder API_ Documentation. The _Zencoder API_ allows you to connect your application to our encoding service and encode videos without going through the web  interface. You may also benefit from one of our [integration libraries](https://app.zencoder.com/docs/faq/basics/libraries) for different languages.'
+          }
+        ]
+      });
+
+      expect(str).to.equal([
+        RAML_PREFIX,
+        'documentation:',
+        '  - title: Home',
+        '    content: |',
+        '      Welcome to the _Zencoder API_ Documentation. The _Zencoder API_ allows you to connect your application to our encoding service and encode videos without going through the web  interface. You may also benefit from one of our [integration libraries](https://app.zencoder.com/docs/faq/basics/libraries) for different languages.'
+      ].join('\n'));
+    });
   });
 });
