@@ -187,5 +187,75 @@ describe('raml object to raml', function () {
         '      Welcome to the _Zencoder API_ Documentation. The _Zencoder API_ allows you to connect your application to our encoding service and encode videos without going through the web  interface. You may also benefit from one of our [integration libraries](https://app.zencoder.com/docs/faq/basics/libraries) for different languages.'
       ].join('\n'));
     });
+
+    it('resource types', function () {
+      var str = toRaml({
+        resourceTypes: [{
+          item: {
+            'delete?': {
+              responses: {
+                '204': {
+                  description: 'Item removed.'
+                }
+              }
+            },
+            'post?':  null,
+            'put?':   null,
+            'get?':   null,
+            'patch?': null,
+            type:     'base'
+          }
+        }]
+      });
+
+      expect(str).to.equal([
+        RAML_PREFIX,
+        'resourceTypes:',
+        '  - item:',
+        '      delete?:',
+        '        responses:',
+        '          204:',
+        '            description: Item removed.',
+        '      post?:',
+        '      put?:',
+        '      get?:',
+        '      patch?:',
+        '      type: base'
+      ].join('\n'));
+    });
+
+    it('traits', function () {
+      var str = toRaml({
+        traits: [{
+          state: {
+            queryParameters: {
+              state: {
+                description: 'String to filter by state.',
+                enum: [
+                  'open',
+                  'closed'
+                ],
+                default: 'open',
+                displayName: 'state',
+                type: 'string'
+              }
+            }
+          }
+        }]
+      });
+
+      expect(str).to.equal([
+        RAML_PREFIX,
+        'traits:',
+        '  - state:',
+        '      queryParameters:',
+        '        state:',
+        '          description: String to filter by state.',
+        '          enum: [ open, closed ]',
+        '          default: open',
+        '          displayName: state',
+        '          type: string'
+      ].join('\n'));
+    });
   });
 });
