@@ -1,12 +1,12 @@
 var expect = require('chai').expect;
-var toRaml = require('../');
+var toRAML = require('../');
 
 describe('raml object to raml', function () {
   var RAML_PREFIX = '#%RAML 0.8';
 
   describe('base parameters', function () {
     it('title', function () {
-      var str = toRaml({
+      var str = toRAML({
         title: 'Example API'
       });
 
@@ -17,7 +17,7 @@ describe('raml object to raml', function () {
     });
 
     it('base uri', function () {
-      var str = toRaml({
+      var str = toRAML({
         baseUri: 'http://example.com'
       });
 
@@ -28,7 +28,7 @@ describe('raml object to raml', function () {
     });
 
     it('media type', function () {
-      var str = toRaml({
+      var str = toRAML({
         mediaType: 'application/json'
       });
 
@@ -39,7 +39,7 @@ describe('raml object to raml', function () {
     });
 
     it('version', function () {
-      var str = toRaml({
+      var str = toRAML({
         version: 'v1.0'
       });
 
@@ -50,7 +50,7 @@ describe('raml object to raml', function () {
     });
 
     it('base uri parameters', function () {
-      var str = toRaml({
+      var str = toRAML({
         baseUriParameters: {
           domain: {
             type: 'string',
@@ -69,7 +69,7 @@ describe('raml object to raml', function () {
     });
 
     it('security schemes', function () {
-      var str = toRaml({
+      var str = toRAML({
         securitySchemes: [{
           oauth_2_0: {
             type: 'OAuth 2.0',
@@ -118,7 +118,7 @@ describe('raml object to raml', function () {
     });
 
     it('schemas', function () {
-      var str = toRaml({
+      var str = toRAML({
         schemas: [
           {
             labels: '{\n    \"$schema\": \"http://json-schema.org/draft-03/schema\",\n    \"type\": \"array\",\n    \"list\": [\n      {\n        \"properties\": {\n          \"url\": {\n            \"type\": \"string\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"color\": {\n            \"type\": \"string\",\n            \"maxLength\": 6,\n            \"minLength\": 6\n          }\n        },\n        \"type\": \"object\"\n      }\n    ]\n}'
@@ -170,7 +170,7 @@ describe('raml object to raml', function () {
     });
 
     it('documentation', function () {
-      var str = toRaml({
+      var str = toRAML({
         documentation: [
           {
             title: 'Home',
@@ -189,7 +189,7 @@ describe('raml object to raml', function () {
     });
 
     it('resource types', function () {
-      var str = toRaml({
+      var str = toRAML({
         resourceTypes: [{
           item: {
             'delete?': {
@@ -225,7 +225,7 @@ describe('raml object to raml', function () {
     });
 
     it('traits', function () {
-      var str = toRaml({
+      var str = toRAML({
         traits: [{
           state: {
             queryParameters: {
@@ -259,7 +259,7 @@ describe('raml object to raml', function () {
     });
 
     it('resources', function () {
-      var str = toRaml({
+      var str = toRAML({
         resources: [{
           type: 'collection',
           relativeUri: '/users',
