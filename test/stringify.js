@@ -285,6 +285,13 @@ describe('raml object to raml', function () {
                 enum: ['followers', 'repositories', 'joined']
               }
             }
+          }],
+          resources: [{
+            type: 'base',
+            relativeUri: '/{userId}',
+            methods: [{
+              method: 'get'
+            }]
           }]
         }]
       });
@@ -305,7 +312,10 @@ describe('raml object to raml', function () {
         '      200:',
         '        body:',
         '          application/json:',
-        '            schema: search-users'
+        '            schema: search-users',
+        '  /{userId}:',
+        '    type: base',
+        '    get: {}'
       ].join('\n'));
     });
   });
