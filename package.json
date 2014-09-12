@@ -30,6 +30,7 @@
   "dependencies": {
     "indent-string": "^1.1.0",
     "repeat-string": "^0.1.2",
+    "string-length": "^1.0.0",
     "xtend": "^4.0.0"
   }
 }
