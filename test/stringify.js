@@ -250,11 +250,10 @@ describe('raml object to raml', function () {
         '  - state:',
         '      queryParameters:',
         '        state:',
+        '          type: string',
         '          description: String to filter by state.',
         '          enum: [ open, closed ]',
-        '          default: open',
-        '          displayName: state',
-        '          type: string'
+        '          default: open'
       ].join('\n'));
     });
 
