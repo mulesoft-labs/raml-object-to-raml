@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git://github.com/mulesoft/raml-object-to-raml.git"
   },
+  "bin": {
+    "raml-object-to-raml": "./bin/raml-object-to-raml.js"
+  },
   "keywords": [
     "raml",
     "object",
@@ -28,6 +31,7 @@
     "mocha": "^1.21.4"
   },
   "dependencies": {
+    "concat-stream": "^1.4.6",
     "indent-string": "^1.1.0",
     "methods": "^1.1.0",
     "repeat-string": "^0.1.2",
