@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var concat = require('concat-stream');
 var toRAML = require('../');
 
