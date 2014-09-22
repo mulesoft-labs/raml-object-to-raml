@@ -14,8 +14,25 @@ npm install raml-object-to-raml --save
 
 ## Usage
 
+### CLI
+
+Supports piping in JSON and printing the resulting RAML to stdout.
+
+```
+cat api.json | raml-object-to-raml > api.raml
+```
+
+### JavaScript
+
+The module can be required inside other projects for generating the RAML file directly from JavaScript objects.
+
 ```javascript
-...
+var toRAML = require('raml-object-to-raml');
+
+console.log(toRAML({ ... }));
+// #%RAML 0.8
+// title: Example API
+// ...
 ```
 
 ## License
