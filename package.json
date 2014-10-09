@@ -4,7 +4,8 @@
   "description": "Takes a RAML object in JavaScript and emits properly-formatted RAML (text).",
   "main": "raml-object-to-raml.js",
   "scripts": {
-    "test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
+    "test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
+    "build": "browserify -e . -s raml-object-to-raml -o dist/raml-object-to-raml.js && uglifyjs dist/raml-object-to-raml.js -o dist/raml-object-to-raml.min.js"
   },
   "repository": {
     "type": "git",
@@ -26,9 +27,11 @@
   },
   "homepage": "https://github.com/mulesoft/raml-object-to-raml",
   "devDependencies": {
+    "browserify": "^6.0.3",
     "chai": "^1.9.1",
     "istanbul": "^0.3.2",
-    "mocha": "^1.21.4"
+    "mocha": "^1.21.4",
+    "uglify-js": "^2.4.15"
   },
   "dependencies": {
     "concat-stream": "^1.4.6",
