@@ -210,7 +210,7 @@ var escape = function (str) {
  *
  * @type {RegExp}
  */
-var METHOD_KEY_REGEXP = /^(?:GET|HEAD|POST|PUT|PATCH|DELETE|OPTIONS)\?$/i;
+var METHOD_KEY_REGEXP = /^(?:GET|HEAD|POST|PUT|PATCH|DELETE|OPTIONS)\??$/i;
 
 /**
  * Sanitize resource types suitable for RAML.
@@ -656,6 +656,16 @@ var escapeString = function (str) {
 };
 
 /**
+ * Wrap a string in quotes and escape.
+ *
+ * @param  {String} str
+ * @return {String}
+ */
+var wrapString = function (str) {
+  return '"' + escapeString(str) + '"';
+};
+
+/**
  * Stringify a string into RAML.
  *
  * @param  {String} str
@@ -663,7 +673,7 @@ var escapeString = function (str) {
  */
 var stringifyString = function (str) {
   if (requiresQuotes(str)) {
-    return '"' + escapeString(str) + '"';
+    return wrapString(str);
   }
 
   return str;
@@ -711,6 +721,10 @@ var stringifyArrayInline = function (array, level, opts) {
   }
 
   return '[ ' + array.map(function (value) {
+    if (is.string(value) && value.indexOf(':') > -1) {
+      return wrapString(value);
+    }
+
     return stringify(value, level, opts);
   }).join(', ') + ' ]';
 };
@@ -831,7 +845,7 @@ var stringifyArrayProperty = function (value, level, opts) {
   }
 
   if (is.string(value) && value.indexOf(':') > -1) {
-    return prefix + ' "' + escapeString(value) + '"';
+    return prefix + ' ' + wrapString(value);
   }
 
   return stringifyProperty(prefix, value, level, opts);
