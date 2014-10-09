@@ -1,0 +1,24 @@
+{
+  "name": "raml-object-to-raml",
+  "main": "dist/raml-object-to-raml.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mulesoft/raml-object-to-raml",
+  "authors": [
+    "MuleSoft, Inc."
+  ],
+  "description": "Takes a RAML object in JavaScript and emits properly-formatted RAML (text).",
+  "keywords": [
+    "raml",
+    "object",
+    "file",
+    "text"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
