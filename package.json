@@ -1,6 +1,6 @@
 {
   "name": "raml-object-to-raml",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Takes a RAML object in JavaScript and emits properly-formatted RAML (text).",
   "main": "raml-object-to-raml.js",
   "scripts": {
