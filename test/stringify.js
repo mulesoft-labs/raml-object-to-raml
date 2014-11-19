@@ -318,5 +318,30 @@ describe('raml object to raml', function () {
         '    get: {}'
       ].join('\n'));
     });
+
+    it('uri parameters', function () {
+      var str = toRAML({
+        resources: [{
+          relativeUri: '/{parameter}',
+          uriParameters: {
+            parameter: {
+              type: 'string'
+            }
+          },
+          methods: [{
+            method: 'get'
+          }]
+        }]
+      });
+
+      expect(str).to.equal([
+        RAML_PREFIX,
+        '/{parameter}:',
+        '  uriParameters:',
+        '    parameter:',
+        '      type: string',
+        '  get: {}'
+      ].join('\n'));
+    });
   });
 });
