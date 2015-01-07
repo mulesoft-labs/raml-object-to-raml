@@ -1,7 +1,7 @@
 {
   "name": "raml-object-to-raml",
   "main": "dist/raml-object-to-raml.js",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "homepage": "https://github.com/mulesoft/raml-object-to-raml",
   "authors": [
     "MuleSoft, Inc."
