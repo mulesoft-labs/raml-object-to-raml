@@ -5,12 +5,18 @@
   "main": "raml-object-to-raml.js",
   "scripts": {
     "test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
-    "build": "browserify -e . -s raml-object-to-raml -o dist/raml-object-to-raml.js && uglifyjs dist/raml-object-to-raml.js -o dist/raml-object-to-raml.min.js"
+    "build": "browserify -e . -s raml-object-to-raml -o dist/raml-object-to-raml.js && uglifyjs dist/raml-object-to-raml.js -o dist/raml-object-to-raml.min.js",
+    "stage-build": "git add dist"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/mulesoft/raml-object-to-raml.git"
   },
+  "pre-commit": [
+    "build",
+    "stage-build",
+    "test"
+  ],
   "bin": {
     "raml-object-to-raml": "./bin/raml-object-to-raml.js"
   },
@@ -31,6 +37,7 @@
     "chai": "^1.9.1",
     "istanbul": "^0.3.2",
     "mocha": "^1.21.4",
+    "pre-commit": "0.0.9",
     "uglify-js": "^2.4.15"
   },
   "dependencies": {

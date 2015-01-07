@@ -85,7 +85,7 @@ module.exports = function (input) {
   return output;
 };
 
-},{"../utils/is":12,"./documentation":1,"./parameters":3,"./resource-types":4,"./resources":5,"./schemas":7,"./security-schemes":8,"./traits":10,"xtend/mutable":18}],3:[function(require,module,exports){
+},{"../utils/is":12,"./documentation":1,"./parameters":3,"./resource-types":4,"./resources":5,"./schemas":7,"./security-schemes":8,"./traits":10,"xtend/mutable":20}],3:[function(require,module,exports){
 var extend = require('xtend/mutable');
 var is     = require('../utils/is');
 
@@ -191,7 +191,7 @@ module.exports = function (params) {
   return obj;
 };
 
-},{"../utils/is":12,"xtend/mutable":18}],4:[function(require,module,exports){
+},{"../utils/is":12,"xtend/mutable":20}],4:[function(require,module,exports){
 var is            = require('../utils/is');
 var sanitizeTrait = require('./trait');
 
@@ -312,7 +312,7 @@ module.exports = function sanitizeResources (resources) {
   return obj;
 };
 
-},{"../utils/is":12,"./parameters":3,"./trait":9,"xtend/mutable":18}],6:[function(require,module,exports){
+},{"../utils/is":12,"./parameters":3,"./trait":9,"xtend/mutable":20}],6:[function(require,module,exports){
 /**
  * Sanitize the responses object.
  *
@@ -915,7 +915,7 @@ module.exports = function (input, opts) {
   }, opts));
 };
 
-},{"./utils/is":12,"indent-string":13,"repeat-string":14,"string-length":15,"xtend/mutable":18}],12:[function(require,module,exports){
+},{"./utils/is":12,"indent-string":13,"repeat-string":16,"string-length":17,"xtend/mutable":20}],12:[function(require,module,exports){
 var is        = exports;
 var _toString = Object.prototype.toString;
 
@@ -963,7 +963,7 @@ is.primitive = function (value) {
 
 },{}],13:[function(require,module,exports){
 'use strict';
-var repeatString = require('repeat-string');
+var repeating = require('repeating');
 
 module.exports = function (str, indent, count) {
 	if (typeof str !== 'string' || typeof indent !== 'string') {
@@ -974,12 +974,49 @@ module.exports = function (str, indent, count) {
 		throw new TypeError('`count` should be a number');
 	}
 
-	indent = count > 1 ? repeatString(indent, count) : indent;
+	indent = count > 1 ? repeating(indent, count) : indent;
 
 	return str.replace(/^(?!\s*$)/mg, indent);
 };
 
-},{"repeat-string":14}],14:[function(require,module,exports){
+},{"repeating":14}],14:[function(require,module,exports){
+'use strict';
+var isFinite = require('is-finite');
+
+module.exports = function (str, n) {
+	if (typeof str !== 'string') {
+		throw new TypeError('Expected a string as the first argument');
+	}
+
+	if (n < 0 || !isFinite(n)) {
+		throw new TypeError('Expected a finite positive number');
+	}
+
+	var ret = '';
+
+	do {
+		if (n & 1) {
+			ret += str;
+		}
+
+		str += str;
+	} while (n = n >> 1);
+
+	return ret;
+};
+
+},{"is-finite":15}],15:[function(require,module,exports){
+'use strict';
+module.exports = Number.isFinite || function (val) {
+	// Number.isNaN() => val !== val
+	if (typeof val !== 'number' || val !== val || val === Infinity || val === -Infinity) {
+		return false;
+	}
+
+	return true;
+};
+
+},{}],16:[function(require,module,exports){
 module.exports = function(str, count) {
   if (count < 1) {
     return '';
@@ -996,7 +1033,7 @@ module.exports = function(str, count) {
   return result;
 }
 
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 var stripAnsi = require('strip-ansi');
 var reAstral = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
@@ -1005,7 +1042,7 @@ module.exports = function (str) {
 	return stripAnsi(str).replace(reAstral, ' ').length;
 };
 
-},{"strip-ansi":16}],16:[function(require,module,exports){
+},{"strip-ansi":18}],18:[function(require,module,exports){
 'use strict';
 var ansiRegex = require('ansi-regex')();
 
@@ -1013,13 +1050,13 @@ module.exports = function (str) {
 	return typeof str === 'string' ? str.replace(ansiRegex, '') : str;
 };
 
-},{"ansi-regex":17}],17:[function(require,module,exports){
+},{"ansi-regex":19}],19:[function(require,module,exports){
 'use strict';
 module.exports = function () {
 	return /(?:(?:\u001b\[)|\u009b)(?:(?:[0-9]{1,3})?(?:(?:;[0-9]{0,3})*)?[A-M|f-m])|\u001b[A-M]/g;
 };
 
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 module.exports = extend
 
 function extend(target) {
@@ -1036,7 +1073,7 @@ function extend(target) {
     return target
 }
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 var sanitize  = require('./lib/sanitize');
 var stringify = require('./lib/stringify');
 
@@ -1050,5 +1087,5 @@ module.exports = function (obj) {
   return '#%RAML 0.8\n' + stringify(sanitize(obj));
 };
 
-},{"./lib/sanitize":2,"./lib/stringify":11}]},{},[19])(19)
+},{"./lib/sanitize":2,"./lib/stringify":11}]},{},[21])(21)
 });
