@@ -343,5 +343,39 @@ describe('raml object to raml', function () {
         '  get: {}'
       ].join('\n'));
     });
+
+    it('secured by', function () {
+      var str = toRAML({
+        resources: [{
+          relativeUri: '/',
+          methods: [{
+            method: 'get',
+            securedBy: [null, 'oauth_1_0', { oauth_2_0: { scopes: ['ADMINISTRATOR'] } }]
+          }]
+        }]
+      })
+
+      expect(str).to.equal([
+        RAML_PREFIX,
+        '/:',
+        '  get:',
+        '    securedBy:',
+        '      - null',
+        '      - oauth_1_0',
+        '      - oauth_2_0:',
+        '          scopes: [ ADMINISTRATOR ]'
+      ].join('\n'))
+    });
+
+    it('root secured by', function () {
+      var str = toRAML({
+        securedBy: [null, 'oauth_1_0', 'oauth_2_0']
+      })
+
+      expect(str).to.equal([
+        RAML_PREFIX,
+        'securedBy: [ null, oauth_1_0, oauth_2_0 ]'
+      ].join('\n'))
+    });
   });
 });
