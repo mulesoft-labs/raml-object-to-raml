@@ -1,3 +1,5 @@
+/* global describe, it */
+
 var expect = require('chai').expect;
 var toRAML = require('../');
 
@@ -375,6 +377,25 @@ describe('raml object to raml', function () {
       expect(str).to.equal([
         RAML_PREFIX,
         'securedBy: [ null, oauth_1_0, oauth_2_0 ]'
+      ].join('\n'))
+    });
+
+    it('resource trait', function () {
+      var str = toRAML({
+        resources: [{
+          relativeUri: '/users',
+          is: ['test'],
+          methods: [{
+            method: 'get'
+          }]
+        }]
+      })
+
+      expect(str).to.equal([
+        '#%RAML 0.8',
+        '/users:',
+        '  is: [ test ]',
+        '  get: {}'
       ].join('\n'))
     });
   });

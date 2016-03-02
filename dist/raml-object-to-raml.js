@@ -305,6 +305,10 @@ module.exports = function sanitizeResources (resources) {
       child.type = resource.type;
     }
 
+    if (is.array(resource.is)) {
+      child.is = resource.is;
+    }
+
     if (is.array(resource.methods)) {
       extend(child, sanitizeMethods(resource.methods));
     }
