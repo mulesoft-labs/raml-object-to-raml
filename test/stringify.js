@@ -384,6 +384,7 @@ describe('raml object to raml', function () {
       var str = toRAML({
         resources: [{
           relativeUri: '/users',
+          description: 'Hello world',
           is: ['test'],
           methods: [{
             method: 'get'
@@ -395,6 +396,7 @@ describe('raml object to raml', function () {
         '#%RAML 0.8',
         '/users:',
         '  is: [ test ]',
+        '  description: Hello world',
         '  get: {}'
       ].join('\n'))
     });
